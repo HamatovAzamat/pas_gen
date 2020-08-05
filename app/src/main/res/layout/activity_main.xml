@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:text="Write your key word"
+        android:textSize="15dp"
+    />
+
+    <EditText
+        android:id="@+id/key_word"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textIsSelectable="false"
+        android:visibility="visible"
+    />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:text="Write the number of symbols in password"
+        android:textSize="15dp"
+     />
+
+    <EditText
+        android:id="@+id/number_of_sym"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textIsSelectable="false"
+        android:visibility="visible" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        >
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:text="Generate password"
+            android:id="@+id/gen_pas"
+         />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:text="Copy to clipboard"
+            android:id="@+id/cpy"
+        />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/result"
+     />
+
+    <TextView
+        android:id="@+id/show"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+    />
+
+
+</LinearLayout>
+
