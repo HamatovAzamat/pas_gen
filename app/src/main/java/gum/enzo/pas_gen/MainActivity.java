@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,14 +14,20 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity {
 
     EditText key_word, number;
     Button gen_pas, cpy;
+    CheckBox check_num, check_lr, check_hr;
     TextView show, result;
     String rez = "";
+    String show_str = "";
     String key = "";
+    int[] alphabet;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +41,10 @@ public class MainActivity extends AppCompatActivity {
         cpy = (Button) findViewById(R.id.cpy);
         show = (TextView) findViewById(R.id.show);
         result = (TextView) findViewById(R.id.result);
-
-
+        check_num = (CheckBox) findViewById(R.id.check_num);
+        check_lr = (CheckBox) findViewById(R.id.check_low_reg);
+        check_hr = (CheckBox) findViewById(R.id.check_high_reg);
+/*
         // Массив для хранения кодов символов "0 - 9"
         int [] numeric;
         int j = 0;
@@ -62,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
             high_reg[j] = i;
             j++;
         }
-
+*/
         cpy.setOnClickListener(copy);
         gen_pas.setOnClickListener(generate);
 
@@ -74,7 +83,9 @@ public class MainActivity extends AppCompatActivity {
 
             result.setText("");
             rez = "";
+            show_str = "";
             show.setText("");
+            alphabet = null;
 
             key = number.getText().toString();
             int num = Integer.parseInt(key);
@@ -86,17 +97,48 @@ public class MainActivity extends AppCompatActivity {
             }
             else
             {
-                int enter_point = (int)(Math.random() * (num - key.length()));
+                alphabet = new int[62]; // Просто максимально возможный размер (переделаю потом в Arraylist)
+                int j = 0;
+                if (check_num.isChecked()){
+                    for (int i = 48; i < 58; i++){
+                        alphabet[j] = i;
+                        show_str += (char)alphabet[j];
+                        j++;
+                    }
+                }
+
+                if (check_hr.isChecked()){
+                    for (int i = 65; i < 91; i++){
+                        alphabet[j] = i;
+                        show_str += (char)alphabet[j];
+                        j++;
+                    }
+                }
+
+                if (check_lr.isChecked()){
+                    for (int i = 97; i < 123; i++){
+                        alphabet[j] = i;
+                        show_str += (char)alphabet[j];
+                        j++;
+                    }
+                }
+
+                show.setText(show_str);
+
+                //Начальная позиция ключевого слова
+                int enter_point = (int)(Math.random() * (num - key.length() + 1));
                 int i = 0;
                 while (i < num){
 
                     if (i != enter_point){
-                        rez = rez + (int)(Math.random() * 10);
+                        rez = rez + (char)alphabet[(int)(Math.random() * (j + 1))];
+                        i++;
                     }
                     else{
                         rez = rez + key;
+                        i += key.length();
                     }
-                    i++;
+
                 }
 
                 result.setText(rez);
